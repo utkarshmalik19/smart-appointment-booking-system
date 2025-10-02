@@ -12,12 +12,12 @@ import java.util.List;
 
 @FeignClient(name = "appointment-service", configuration = FeignConfig.class)
 public interface AppointmentClient {
-    @GetMapping("/doctor/{doctorId}")
+    @GetMapping("/api/appointments/doctor/{doctorId}")
     List<AppointmentDto> getAppointmentsByDoctor(@PathVariable("doctorId") Long doctorId);
 
-    @GetMapping("/doctor/{doctorId}/appointments/pending")
+    @GetMapping("/api/appointments/doctor/{doctorId}/appointments/pending")
     List<AppointmentDto> getPendingAppointments(@PathVariable("doctorId") Long doctorId);
 
-    @PutMapping("/{id}/status/{status}")
+    @PutMapping("/api/appointments/{id}/status/{status}")
     AppointmentDto updateAppointmentStatus(@PathVariable("id") Long id, @PathVariable("status") AppointmentDto.Status status);
 }

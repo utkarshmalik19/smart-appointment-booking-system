@@ -22,11 +22,11 @@ public class DoctorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Doctor> getDoctorById(@PathVariable Long id) {
-        return ResponseEntity.ok(doctorService.getDoctorById(id));
+    public ResponseEntity<Doctor> getDoctorById(@PathVariable Long id,@RequestHeader("Authorization" )String authHeader) {
+        return ResponseEntity.ok(doctorService.getDoctorById(id,authHeader));
     }
     @PostMapping("/update")
-    public ResponseEntity<Doctor> updatePatientDetails(@RequestBody Doctor doctor, @RequestHeader("Authorization") String authHeader){
+    public ResponseEntity<Doctor> updateDoctorDetails(@RequestBody Doctor doctor, @RequestHeader("Authorization") String authHeader){
         return ResponseEntity.ok(doctorService.updateDoctorDetails(doctor,authHeader));
     }
     @DeleteMapping("/{id}")
@@ -35,12 +35,12 @@ public class DoctorController {
         return ResponseEntity.noContent().build();
     }
     @GetMapping("/{id}/appointments")
-    public ResponseEntity<List<AppointmentDto>> getAppointments(@PathVariable Long id){
-        return ResponseEntity.ok(doctorService.getDoctorAppointments(id));
+    public ResponseEntity<List<AppointmentDto>> getAppointments(@PathVariable Long id, @RequestHeader("Authorization") String authHeader){
+        return ResponseEntity.ok(doctorService.getDoctorAppointments(id,authHeader));
     }
     @GetMapping("/{id}/appointments/pending")
-    public ResponseEntity<List<AppointmentDto>> getPendingAppointments(@PathVariable Long id){
-        return ResponseEntity.ok(doctorService.getPendingAppointments(id));
+    public ResponseEntity<List<AppointmentDto>> getPendingAppointments(@PathVariable Long id, @RequestHeader("Authorization") String authHeader){
+        return ResponseEntity.ok(doctorService.getPendingAppointments(id,authHeader));
     }
     @PutMapping("/appointments/{appointmentId}/status")
     public ResponseEntity<AppointmentDto> updateAppointmentStatus(@PathVariable Long appointmentId, @RequestParam AppointmentDto.Status status){

@@ -10,7 +10,6 @@ public interface PatientService {
     Patient getPatientById(Long id, String authHeader);
     Patient updatePatientDetails(Patient patient, String jwtToken);
     AppointmentDto bookAppointment(Long patientId, AppointmentDto appointmentDto);
-    List<AppointmentDto> getAppointments(Long patientId);
-    AppointmentDto getAppointmentById(Long appointmentId);
-    AppointmentDto cancelAppointment(Long appointmentId);
+    List<AppointmentDto> getAppointments(Long patientId, String authHeader);
+    AppointmentDto cancelAppointment(Long appointmentId, String authHeader);
 }

@@ -35,17 +35,13 @@ public class PatientController {
     }
 
     @GetMapping("/{id}/appointments")
-    public ResponseEntity<List<AppointmentDto>> getAppointments(@PathVariable Long id){
-        return ResponseEntity.ok(patientService.getAppointments(id));
+    public ResponseEntity<List<AppointmentDto>> getAppointments(@PathVariable Long id,@RequestHeader("Authorization" )String authHeader){
+        return ResponseEntity.ok(patientService.getAppointments(id,authHeader));
     }
 
-    @GetMapping("/{appointmentId}/appointment")
-    public ResponseEntity<AppointmentDto> getAppointmentById(@PathVariable Long appointmentId){
-        return ResponseEntity.ok(patientService.getAppointmentById(appointmentId));
-    }
     @PutMapping("/appointment/{appointmentId}/cancel")
-    public ResponseEntity<AppointmentDto> cancelAppointment(@PathVariable Long appointmentId){
-        return ResponseEntity.ok(patientService.cancelAppointment(appointmentId));
+    public ResponseEntity<AppointmentDto> cancelAppointment(@PathVariable Long appointmentId,@RequestHeader("Authorization" )String authHeader){
+        return ResponseEntity.ok(patientService.cancelAppointment(appointmentId,authHeader));
     }
 
 

@@ -12,5 +12,5 @@ public interface AuthClient {
     @GetMapping("/api/auth/users/{id}")
     UserDto getUserById(@PathVariable Long id, @RequestHeader("Authorization") String authHeader);
     @GetMapping("/api/auth/authenticate")
-    UserDto getUserFromToken(@RequestHeader("Authorization") String authHeader);
+    UserDto getCurrentUser(@RequestHeader("Authorization") String authHeader);
 }

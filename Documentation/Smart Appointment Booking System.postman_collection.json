@@ -1,0 +1,829 @@
+{
+	"info": {
+		"_postman_id": "6880093d-5120-452d-a57c-61b703e3590d",
+		"name": "Smart Appointment Booking System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25598622"
+	},
+	"item": [
+		{
+			"name": "Appointments",
+			"item": [
+				{
+					"name": "Cancel Appointment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0Iiwicm9sZSI6IlJPTEVfUEFUSUVOVCIsInVzZXJJZCI6MSwiaWF0IjoxNzU5MTY1NDMxLCJleHAiOjE3NTkxNjkwMzF9.UKVnMMEl_Oj5TBqkSo8J3JQ3hPIuVaa12JswHpHnkEtzfL8OG-_57oJ2vSDuQ4vM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/appointments/9/cancel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"appointments",
+								"9",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create appointment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0Iiwicm9sZSI6IlJPTEVfUEFUSUVOVCIsInVzZXJJZCI6MSwiaWF0IjoxNzU5MjUwNDU2LCJleHAiOjE3NTkyNTQwNTZ9.lZmZII28N9SyQEX8gjG7jQU7jI-q2p4f9UJjpz1XnVc_HQaKQKkm9fKHXUfgRR8A",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"patientId\": 1,\r\n  \"doctorId\": 2,\r\n  \"status\": \"PENDING\",\r\n  \"startTime\": \"2025-10-30T15:15:00\",\r\n  \"endTime\": \"2025-10-30T15:30:00\",\r\n  \"notes\": \"check up\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/appointments/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"appointments",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Appointment By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0Iiwicm9sZSI6IlJPTEVfUEFUSUVOVCIsInVzZXJJZCI6MSwiaWF0IjoxNzU5MTY1NDMxLCJleHAiOjE3NTkxNjkwMzF9.UKVnMMEl_Oj5TBqkSo8J3JQ3hPIuVaa12JswHpHnkEtzfL8OG-_57oJ2vSDuQ4vM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"patientId\": 1,\r\n  \"doctorId\": 2,\r\n  \"status\": \"PENDING\",\r\n  \"startTime\": \"2025-09-23T12:40:00\",\r\n  \"endTime\": \"2025-09-23T12:45:00\",\r\n  \"notes\": \"check up\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/appointments/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"appointments",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get doctor appointments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0Iiwicm9sZSI6IlJPTEVfUEFUSUVOVCIsInVzZXJJZCI6MSwiaWF0IjoxNzU5MTY1NDMxLCJleHAiOjE3NTkxNjkwMzF9.UKVnMMEl_Oj5TBqkSo8J3JQ3hPIuVaa12JswHpHnkEtzfL8OG-_57oJ2vSDuQ4vM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/appointments/doctor/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"appointments",
+								"doctor",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get patient appointments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0Iiwicm9sZSI6IlJPTEVfUEFUSUVOVCIsInVzZXJJZCI6MSwiaWF0IjoxNzU5MTY1NDMxLCJleHAiOjE3NTkxNjkwMzF9.UKVnMMEl_Oj5TBqkSo8J3JQ3hPIuVaa12JswHpHnkEtzfL8OG-_57oJ2vSDuQ4vM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/appointments/patient/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"appointments",
+								"patient",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get pending appointments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0Iiwicm9sZSI6IlJPTEVfUEFUSUVOVCIsInVzZXJJZCI6MSwiaWF0IjoxNzU5MTY1NDMxLCJleHAiOjE3NTkxNjkwMzF9.UKVnMMEl_Oj5TBqkSo8J3JQ3hPIuVaa12JswHpHnkEtzfL8OG-_57oJ2vSDuQ4vM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/appointments/doctor/3/appointments/pending",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"appointments",
+								"doctor",
+								"3",
+								"appointments",
+								"pending"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete appointment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0Iiwicm9sZSI6IlJPTEVfUEFUSUVOVCIsInVzZXJJZCI6MSwiaWF0IjoxNzU5MTY1NDMxLCJleHAiOjE3NTkxNjkwMzF9.UKVnMMEl_Oj5TBqkSo8J3JQ3hPIuVaa12JswHpHnkEtzfL8OG-_57oJ2vSDuQ4vM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"patientId\": 1,\r\n  \"doctorId\": 2,\r\n  \"status\": \"PENDING\",\r\n  \"startTime\": \"2025-09-23T12:40:00\",\r\n  \"endTime\": \"2025-09-23T12:45:00\",\r\n  \"notes\": \"check up\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/appointments/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"appointments",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patient",
+			"item": [
+				{
+					"name": "Get patient appointment",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0Iiwicm9sZSI6IlJPTEVfUEFUSUVOVCIsInVzZXJJZCI6MSwiaWF0IjoxNzU5MzM4MjE0LCJleHAiOjE3NTkzNDE4MTR9.kUb3WKOtU1aM6ofg2XZDJSlVNzpom_0aQ7BYFCeUE8y3INXPkcADRS55707mXRex",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/patients/3/appointments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"patients",
+								"3",
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Appointment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/patients/appointment/3/cancel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"patients",
+								"appointment",
+								"3",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Patient details",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0Iiwicm9sZSI6IlJPTEVfUEFUSUVOVCIsInVzZXJJZCI6MSwiaWF0IjoxNzU5MjA2NTQ5LCJleHAiOjE3NTkyMTAxNDl9.ie5svEv2AR-3zeXUZLO_ZWRYodd7Ge35PS6FT572cxx2A_iB38QkG4fjBwOqklSY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"4\",\r\n    \"name\": \"Sydney\",\r\n    \"phone\": \"987654321\",\r\n    \"age\": \"34\",\r\n    \"gender\": \"Female\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/patients/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"patients",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patient By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0Iiwicm9sZSI6IlJPTEVfUEFUSUVOVCIsInVzZXJJZCI6MSwiaWF0IjoxNzU5MzM4MjE0LCJleHAiOjE3NTkzNDE4MTR9.kUb3WKOtU1aM6ofg2XZDJSlVNzpom_0aQ7BYFCeUE8y3INXPkcADRS55707mXRex",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/patients/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"patients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book appointment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0Iiwicm9sZSI6IlJPTEVfUEFUSUVOVCIsInVzZXJJZCI6MSwiaWF0IjoxNzU5MjA2NTQ5LCJleHAiOjE3NTkyMTAxNDl9.ie5svEv2AR-3zeXUZLO_ZWRYodd7Ge35PS6FT572cxx2A_iB38QkG4fjBwOqklSY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"patientId\": 1,\r\n  \"doctorId\": 2,\r\n  \"status\": \"PENDING\",\r\n  \"startTime\": \"2025-09-30T12:40:00\",\r\n  \"endTime\": \"2025-09-30T12:55:00\",\r\n  \"notes\": \"check up\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/patients/1/appointments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"patients",
+								"1",
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Doctor",
+			"item": [
+				{
+					"name": "Get pending appointment",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1dGthcnNoIiwicm9sZSI6IlJPTEVfRE9DVE9SIiwidXNlcklkIjozLCJpYXQiOjE3NTkzMzk4NzMsImV4cCI6MTc1OTM0MzQ3M30.q_lQ5LHod0L9szaqjFvUaxfjh-IRzZ2kvXQwz0OFQpXuL8sQ8bWkSXlSBtc1ZFsW",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/doctors/1/appointments/pending",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"doctors",
+								"1",
+								"appointments",
+								"pending"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Doctor details",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1dGthcnNoIiwicm9sZSI6IlJPTEVfRE9DVE9SIiwidXNlcklkIjozLCJpYXQiOjE3NTk0MDQzNzEsImV4cCI6MTc1OTQwNzk3MX0.aTvuSARfPED4VJvoxztSSbzR-osxttG-tPClmq-Wq_ShoX2y9eTfcsoc4fVb-w5B",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"5\",\r\n    \"speciality\": \"Psychologist\",\r\n    \"yearsOfExperience\": \"10\",\r\n    \"phone\": \"9784563142\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/doctors/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"doctors",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get appointments by doctor",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1dGthcnNoIiwicm9sZSI6IlJPTEVfRE9DVE9SIiwidXNlcklkIjozLCJpYXQiOjE3NTkzMzk4NzMsImV4cCI6MTc1OTM0MzQ3M30.q_lQ5LHod0L9szaqjFvUaxfjh-IRzZ2kvXQwz0OFQpXuL8sQ8bWkSXlSBtc1ZFsW",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/doctors/1/appointments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"doctors",
+								"1",
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get doctor by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1dGthcnNoIiwicm9sZSI6IlJPTEVfRE9DVE9SIiwidXNlcklkIjozLCJpYXQiOjE3NTkzODI2NTYsImV4cCI6MTc1OTM4NjI1Nn0.qlO5_w8Ju8G-ueOjIBAGRXmTCnf1xCbe-XQTxj0KK-GJUooYWNQIN7BRM_kjXs0e",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/doctors/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"doctors",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test2@test.com\",\r\n    \"password\" : \"test2\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test\",\r\n    \"password\" : \"test\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Get all patients",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwidXNlcklkIjoyLCJpYXQiOjE3NTk0MTEyNTIsImV4cCI6MTc1OTQxNDg1Mn0.BhPr8XxIKQieKNQ0CjFVgb8gyhGl6L4OxPPZrxb166rNUt5vRdLtlY95qstBXEz1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/patients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all doctors",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwidXNlcklkIjoyLCJpYXQiOjE3NTk0MDYxODUsImV4cCI6MTc1OTQwOTc4NX0.AR9sYxwewqYN2Le7sjewDQxRP_SzZJajMNWsR4IA3LSM_M2UCSfAH27dtGNbrLdg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/doctors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create doctor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwidXNlcklkIjoyLCJpYXQiOjE3NTkzODI4NDgsImV4cCI6MTc1OTM4NjQ0OH0.9N4R721E8_liOsAx3-BBqQvXEGnhwMIdKgV7iuod1qdu2xlu3uiHtIn6AQLY54RA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"doctor\",\r\n    \"password\" : \"doctor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/admin/doctors/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"doctors",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get doctor by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwidXNlcklkIjoyLCJpYXQiOjE3NTk0MTEyNTIsImV4cCI6MTc1OTQxNDg1Mn0.BhPr8XxIKQieKNQ0CjFVgb8gyhGl6L4OxPPZrxb166rNUt5vRdLtlY95qstBXEz1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/doctors/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"doctors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete doctor",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwidXNlcklkIjoyLCJpYXQiOjE3NTk0MTEyNTIsImV4cCI6MTc1OTQxNDg1Mn0.BhPr8XxIKQieKNQ0CjFVgb8gyhGl6L4OxPPZrxb166rNUt5vRdLtlY95qstBXEz1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/doctors/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"doctors",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all patients",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwidXNlcklkIjoyLCJpYXQiOjE3NTk0MTEyNTIsImV4cCI6MTc1OTQxNDg1Mn0.BhPr8XxIKQieKNQ0CjFVgb8gyhGl6L4OxPPZrxb166rNUt5vRdLtlY95qstBXEz1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/patients/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"patients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get appointment by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwidXNlcklkIjoyLCJpYXQiOjE3NTk0MTEyNTIsImV4cCI6MTc1OTQxNDg1Mn0.BhPr8XxIKQieKNQ0CjFVgb8gyhGl6L4OxPPZrxb166rNUt5vRdLtlY95qstBXEz1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/appointments/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"appointments",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get appointment by patient id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get appointments by doctor id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwidXNlcklkIjoyLCJpYXQiOjE3NTk0MTEyNTIsImV4cCI6MTc1OTQxNDg1Mn0.BhPr8XxIKQieKNQ0CjFVgb8gyhGl6L4OxPPZrxb166rNUt5vRdLtlY95qstBXEz1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/appointments/doctor/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"appointments",
+								"doctor",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete appointment",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

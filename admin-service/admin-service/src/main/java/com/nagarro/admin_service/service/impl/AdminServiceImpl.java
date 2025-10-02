@@ -1,5 +1,7 @@
 package com.nagarro.admin_service.service.impl;
 
+import com.nagarro.admin_service.exception.InvalidInputException;
+import com.nagarro.admin_service.exception.NotFoundException;
 import com.nagarro.admin_service.model.*;
 import com.nagarro.admin_service.service.*;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public SignupResponseDto createDoctor(SignupRequestDto request) {
+        if(request.getUsername() == null || request.getPassword() == null){
+            throw new InvalidInputException("Username or id should not be blank");
+        }
         return authClient.signupDoctor(request);
     }
 
@@ -33,6 +38,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void deleteDoctor(Long id) {
+
         doctorClient.deleteDoctor(id);
     }
 
@@ -48,16 +54,25 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public AppointmentDto getAppointmentById(Long id) {
+        if(appointmentClient.getAppointmentById(id)==null){
+            throw new NotFoundException("Appointment doesn't exists");
+        }
         return appointmentClient.getAppointmentById(id);
     }
 
     @Override
     public List<AppointmentDto> getAppointmentsByPatientId(Long id) {
+        if(appointmentClient.getAppointmentByPatientId(id)==null){
+            throw new NotFoundException("Appointment doesn't exists");
+        }
         return appointmentClient.getAppointmentByPatientId(id);
     }
 
     @Override
     public List<AppointmentDto> getAppointmentsByDoctorId(Long id) {
+        if(appointmentClient.getAppointmentByDoctorId(id)==null){
+            throw new NotFoundException("Appointment doesn't exists");
+        }
         return appointmentClient.getAppointmentByDoctorId(id);
     }
 

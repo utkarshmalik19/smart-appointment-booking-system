@@ -31,9 +31,9 @@ public class AdminController {
     }
 
     @DeleteMapping("/doctors/{id}")
-    public ResponseEntity<Void> deleteDoctor(@PathVariable Long id) {
+    public ResponseEntity<String> deleteDoctor(@PathVariable Long id) {
         adminService.deleteDoctor(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Doctor deleted");
     }
 
     // Patient APIs
@@ -64,8 +64,8 @@ public class AdminController {
     }
 
     @DeleteMapping("/appointments/{id}")
-    public ResponseEntity<Void> deleteAppointment(@PathVariable Long id) {
+    public ResponseEntity<String> deleteAppointment(@PathVariable Long id) {
         adminService.deleteAppointment(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Appointment deleted");
     }
 }

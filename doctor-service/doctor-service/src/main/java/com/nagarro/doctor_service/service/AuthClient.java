@@ -11,4 +11,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface AuthClient {
     @GetMapping("/api/auth/users/{id}")
     UserDto getUserById(@PathVariable Long id, @RequestHeader("Authorization") String authHeader);
+    @GetMapping("/api/auth/authenticate")
+    UserDto getCurrentUser(@RequestHeader("Authorization") String authHeader);
 }

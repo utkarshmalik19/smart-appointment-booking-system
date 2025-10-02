@@ -32,17 +32,14 @@ public class PatientServiceImpl implements PatientService {
     public Patient getPatientById(Long id, String authHeader) {
         Patient patient = patientRepository.findById(id).orElseThrow(()-> new NotFoundException("Patient not found"));
         UserDto user = authClient.getUserById(patient.getUserId(), authHeader);
-        UserDto loggedInUser = authClient.getUserFromToken(authHeader);
-        if (!loggedInUser.getId().equals(patient.getUserId())) {
+        UserDto loggedInUser = authClient.getCurrentUser(authHeader);
+        if (!loggedInUser.getId().equals(patient.getUserId())&& loggedInUser.getRole().getId()!=3) {
             throw new UnauthorizedException("You can only access your own details");
         }
         if (user == null || !user.getRole().getRoleName().equals("ROLE_PATIENT")) {
             throw new UnauthorizedException("Unauthorized or role mismatch");
         }
-        // Check if requested patient ID matches the JWT user ID
-        if (!user.getId().equals(patient.getUserId())) {
-            throw new IllegalArgumentException("You are not authorized to view this patient details");
-        }
+
         return patient;
     }
 
@@ -71,20 +68,24 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<AppointmentDto> getAppointments(Long patientId) {
+    public List<AppointmentDto> getAppointments(Long patientId, String authHeader) {
+        Patient patient = patientRepository.findById(patientId).orElseThrow(()-> new NotFoundException("Patient not found"));
         List<AppointmentDto> allAppointments = appointmentClient.getAppointmentByPatientId(patientId);
+        UserDto user = authClient.getUserById(patient.getUserId(), authHeader);
+        UserDto loggedInUser = authClient.getCurrentUser(authHeader);
+        if (!loggedInUser.getId().equals(patient.getUserId())&& loggedInUser.getRole().getId()!=3) {
+            throw new UnauthorizedException("You can only access your own details");
+        }
+        if (user == null || !user.getRole().getRoleName().equals("ROLE_PATIENT")) {
+            throw new UnauthorizedException("Unauthorized or role mismatch");
+        }
         //FILTER OUT CANCELLED APPOINTMENTS
         return allAppointments.stream().filter(appointment -> appointment.getAppointmentStatus() != AppointmentDto.AppointmentStatus.CANCELLED)
                 .toList();
     }
 
     @Override
-    public AppointmentDto getAppointmentById(Long appointmentId) {
-        return appointmentClient.getAppointmentById(appointmentId);
-    }
-
-    @Override
-    public AppointmentDto cancelAppointment(Long appointmentId) {
+    public AppointmentDto cancelAppointment(Long appointmentId, String authHeader) {
         AppointmentDto appointment = appointmentClient.getAppointmentById(appointmentId);
         appointment.setAppointmentStatus(AppointmentDto.AppointmentStatus.CANCELLED);
         return appointmentClient.cancelAppointment(appointmentId);
