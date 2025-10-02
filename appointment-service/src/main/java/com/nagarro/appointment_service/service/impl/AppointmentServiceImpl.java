@@ -11,6 +11,9 @@ import com.nagarro.appointment_service.service.AppointmentService;
 import com.nagarro.appointment_service.service.NotificationClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -124,11 +127,12 @@ String email = "firipa1069@rograc.com";
     }
 
     @Override
-    public List<Appointment> getAppointmentsForDoctor(Long doctorId) {
+    public Page<Appointment> getAppointmentsForDoctor(Long doctorId, int page, int size) {
         if (doctorId == null) {
             throw new AppointmentBookingException("Doctor ID is required");
         }
-        return appointmentRepository.findByDoctorId(doctorId);
+        Pageable pageable = PageRequest.of(page,size);
+        return appointmentRepository.findByDoctorId(doctorId,pageable);
     }
 
     @Override
@@ -142,20 +146,22 @@ String email = "firipa1069@rograc.com";
     }
 
     @Override
-    public List<Appointment> getPendingAppointments(Long doctorId) {
+    public Page<Appointment> getPendingAppointments(Long doctorId, int page, int size) {
         if (doctorId == null) {
             throw new AppointmentBookingException("Doctor ID is required");
         }
-        return appointmentRepository.findByDoctorIdAndStatus(doctorId,AppointmentStatus.PENDING);
+        Pageable pageable = PageRequest.of(page,size);
+        return appointmentRepository.findByDoctorIdAndStatus(doctorId,AppointmentStatus.PENDING, pageable);
 
     }
 
     @Override
-    public List<Appointment> getAppointmentsForPatient(Long patientId) {
+    public Page<Appointment> getAppointmentsForPatient(Long patientId, int page, int size) {
         if (patientId == null) {
             throw new AppointmentBookingException("Patient ID is required");
         }
-        return appointmentRepository.findByPatientId(patientId);
+        Pageable pageable = PageRequest.of(page,size);
+        return appointmentRepository.findByPatientId(patientId,pageable);
     }
 
     @Override

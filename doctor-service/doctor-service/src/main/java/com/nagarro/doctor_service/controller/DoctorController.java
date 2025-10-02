@@ -6,8 +6,8 @@ import com.nagarro.doctor_service.service.DoctorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/doctors")
@@ -17,8 +17,8 @@ public class DoctorController {
     private final DoctorService doctorService;
 
     @GetMapping
-    public ResponseEntity<List<Doctor>> getAllDoctors() {
-        return ResponseEntity.ok(doctorService.getAllDoctors());
+    public ResponseEntity<Page<Doctor>> getAllDoctors(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(doctorService.getAllDoctors(page,size));
     }
 
     @GetMapping("/{id}")
@@ -35,12 +35,12 @@ public class DoctorController {
         return ResponseEntity.noContent().build();
     }
     @GetMapping("/{id}/appointments")
-    public ResponseEntity<List<AppointmentDto>> getAppointments(@PathVariable Long id, @RequestHeader("Authorization") String authHeader){
-        return ResponseEntity.ok(doctorService.getDoctorAppointments(id,authHeader));
+    public ResponseEntity<Page<AppointmentDto>> getAppointments(@PathVariable Long id, @RequestHeader("Authorization") String authHeader, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        return ResponseEntity.ok(doctorService.getDoctorAppointments(id,authHeader,page,size));
     }
     @GetMapping("/{id}/appointments/pending")
-    public ResponseEntity<List<AppointmentDto>> getPendingAppointments(@PathVariable Long id, @RequestHeader("Authorization") String authHeader){
-        return ResponseEntity.ok(doctorService.getPendingAppointments(id,authHeader));
+    public ResponseEntity<Page<AppointmentDto>> getPendingAppointments(@PathVariable Long id, @RequestHeader("Authorization") String authHeader, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        return ResponseEntity.ok(doctorService.getPendingAppointments(id,authHeader,page,size));
     }
     @PutMapping("/appointments/{appointmentId}/status")
     public ResponseEntity<AppointmentDto> updateAppointmentStatus(@PathVariable Long appointmentId, @RequestParam AppointmentDto.Status status){

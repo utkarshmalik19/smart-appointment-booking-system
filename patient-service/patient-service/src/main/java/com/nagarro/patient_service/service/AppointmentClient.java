@@ -2,6 +2,7 @@ package com.nagarro.patient_service.service;
 
 import com.nagarro.patient_service.model.AppointmentDto;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ public interface AppointmentClient {
     AppointmentDto createAppointment(@RequestBody AppointmentDto appointment);
 
     @GetMapping("/patient/{patientId}")
-    List<AppointmentDto> getAppointmentByPatientId(@PathVariable("patientId") Long patientId);
+    Page<AppointmentDto> getAppointmentByPatientId(@PathVariable("patientId") Long patientId, @RequestParam int page, @RequestParam int size);
 
     @GetMapping("/{appointmentId}")
     AppointmentDto getAppointmentById(@PathVariable("appointmentId") Long appointmentId);

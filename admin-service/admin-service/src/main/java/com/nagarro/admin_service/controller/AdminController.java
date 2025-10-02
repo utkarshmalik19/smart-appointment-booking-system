@@ -3,6 +3,7 @@ package com.nagarro.admin_service.controller;
 import com.nagarro.admin_service.model.*;
 import com.nagarro.admin_service.service.AdminService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +22,8 @@ public class AdminController {
     }
 
     @GetMapping("/doctors")
-    public ResponseEntity<List<DoctorDto>> getAllDoctors() {
-        return ResponseEntity.ok(adminService.getAllDoctors());
+    public ResponseEntity<Page<DoctorDto>> getAllDoctors(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(adminService.getAllDoctors(page,size));
     }
 
     @GetMapping("/doctors/{id}")
@@ -38,8 +39,8 @@ public class AdminController {
 
     // Patient APIs
     @GetMapping("/patients")
-    public ResponseEntity<List<PatientDto>> getAllPatients() {
-        return ResponseEntity.ok(adminService.getAllPatients());
+    public ResponseEntity<Page<PatientDto>> getAllPatients(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(adminService.getAllPatients(page, size));
     }
 
     @GetMapping("/patients/{id}")
@@ -54,13 +55,13 @@ public class AdminController {
     }
 
     @GetMapping("/appointments/patient/{patientId}")
-    public ResponseEntity<List<AppointmentDto>> getAppointmentsByPatientId(@PathVariable Long patientId) {
-        return ResponseEntity.ok(adminService.getAppointmentsByPatientId(patientId));
+    public ResponseEntity<Page<AppointmentDto>> getAppointmentsByPatientId(@PathVariable Long patientId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(adminService.getAppointmentsByPatientId(patientId,page,size));
     }
 
     @GetMapping("/appointments/doctor/{doctorId}")
-    public ResponseEntity<List<AppointmentDto>> getAppointmentsByDoctorId(@PathVariable Long doctorId) {
-        return ResponseEntity.ok(adminService.getAppointmentsByDoctorId(doctorId));
+    public ResponseEntity<Page<AppointmentDto>> getAppointmentsByDoctorId(@PathVariable Long doctorId,@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(adminService.getAppointmentsByDoctorId(doctorId,page,size));
     }
 
     @DeleteMapping("/appointments/{id}")

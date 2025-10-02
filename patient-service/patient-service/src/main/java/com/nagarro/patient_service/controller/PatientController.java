@@ -4,10 +4,10 @@ import com.nagarro.patient_service.model.AppointmentDto;
 import com.nagarro.patient_service.model.Patient;
 import com.nagarro.patient_service.service.PatientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,8 +21,8 @@ public class PatientController {
         return ResponseEntity.ok(patientService.updatePatientDetails(patient,authHeader));
     }
     @GetMapping
-    public ResponseEntity<List<Patient>> getAllPatients() {
-        return ResponseEntity.ok(patientService.getAllPatients());
+    public ResponseEntity<Page<Patient>> getAllPatients(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(patientService.getAllPatients(page,size));
     }
 
     @GetMapping("/{id}")
@@ -35,8 +35,8 @@ public class PatientController {
     }
 
     @GetMapping("/{id}/appointments")
-    public ResponseEntity<List<AppointmentDto>> getAppointments(@PathVariable Long id,@RequestHeader("Authorization" )String authHeader){
-        return ResponseEntity.ok(patientService.getAppointments(id,authHeader));
+    public ResponseEntity<Page<AppointmentDto>> getAppointments(@PathVariable Long id,@RequestHeader("Authorization" )String authHeader, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        return ResponseEntity.ok(patientService.getAppointments(id,authHeader, page,size));
     }
 
     @PutMapping("/appointment/{appointmentId}/cancel")

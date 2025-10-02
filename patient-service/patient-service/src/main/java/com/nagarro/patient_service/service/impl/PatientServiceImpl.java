@@ -10,6 +10,9 @@ import com.nagarro.patient_service.service.AppointmentClient;
 import com.nagarro.patient_service.service.AuthClient;
 import com.nagarro.patient_service.service.PatientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +27,9 @@ public class PatientServiceImpl implements PatientService {
 
 
     @Override
-    public List<Patient> getAllPatients() {
-        return patientRepository.findAll();
+    public Page<Patient> getAllPatients(int page, int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        return patientRepository.findAll(pageable);
     }
 
     @Override
@@ -68,9 +72,10 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<AppointmentDto> getAppointments(Long patientId, String authHeader) {
+    public Page<AppointmentDto> getAppointments(Long patientId, String authHeader,int page,int size) {
+        Pageable pageable = PageRequest.of(page,size);
         Patient patient = patientRepository.findById(patientId).orElseThrow(()-> new NotFoundException("Patient not found"));
-        List<AppointmentDto> allAppointments = appointmentClient.getAppointmentByPatientId(patientId);
+        Page<AppointmentDto> allAppointments = appointmentClient.getAppointmentByPatientId(patientId,page,size);
         UserDto user = authClient.getUserById(patient.getUserId(), authHeader);
         UserDto loggedInUser = authClient.getCurrentUser(authHeader);
         if (!loggedInUser.getId().equals(patient.getUserId())&& loggedInUser.getRole().getId()!=3) {
@@ -80,8 +85,7 @@ public class PatientServiceImpl implements PatientService {
             throw new UnauthorizedException("Unauthorized or role mismatch");
         }
         //FILTER OUT CANCELLED APPOINTMENTS
-        return allAppointments.stream().filter(appointment -> appointment.getAppointmentStatus() != AppointmentDto.AppointmentStatus.CANCELLED)
-                .toList();
+        return allAppointments;
     }
 
     @Override

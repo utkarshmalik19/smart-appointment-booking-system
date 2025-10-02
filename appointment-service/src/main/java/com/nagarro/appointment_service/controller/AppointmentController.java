@@ -5,6 +5,7 @@ import com.nagarro.appointment_service.model.Appointment;
 import com.nagarro.appointment_service.model.AppointmentStatus;
 import com.nagarro.appointment_service.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,18 +35,18 @@ public class AppointmentController {
     }
 
     @GetMapping("/doctor/{doctorId}")
-    public List<Appointment> getDoctorAppointments(@PathVariable Long doctorId){
-        return appointmentService.getAppointmentsForDoctor(doctorId);
+    public Page<Appointment> getDoctorAppointments(@PathVariable Long doctorId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        return appointmentService.getAppointmentsForDoctor(doctorId,page,size);
     }
 
     @GetMapping("/doctor/{doctorId}/appointments/pending")
-    List<Appointment> getPendingAppointments(@PathVariable("doctorId") Long doctorId){
-        return appointmentService.getPendingAppointments(doctorId);
+    Page<Appointment> getPendingAppointments(@PathVariable("doctorId") Long doctorId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        return appointmentService.getPendingAppointments(doctorId,page,size);
     }
 
     @GetMapping("/patient/{patientId}")
-    public List<Appointment> getPatientAppointments(@PathVariable Long patientId){
-        return appointmentService.getAppointmentsForPatient(patientId);
+    public Page<Appointment> getPatientAppointments(@PathVariable Long patientId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        return appointmentService.getAppointmentsForPatient(patientId,page,size);
     }
 
     @PutMapping("/{id}/status/{status}")

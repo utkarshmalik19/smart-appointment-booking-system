@@ -5,6 +5,7 @@ import com.nagarro.admin_service.exception.NotFoundException;
 import com.nagarro.admin_service.model.*;
 import com.nagarro.admin_service.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,8 +28,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<DoctorDto> getAllDoctors() {
-        return doctorClient.getAllDoctors();
+    public Page<DoctorDto> getAllDoctors(int page, int size) {
+        return doctorClient.getAllDoctors(page,size);
     }
 
     @Override
@@ -43,8 +44,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<PatientDto> getAllPatients() {
-        return patientClient.getAllPatients();
+    public Page<PatientDto> getAllPatients(int page, int size) {
+        return patientClient.getAllPatients(page,size);
     }
 
     @Override
@@ -61,19 +62,19 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<AppointmentDto> getAppointmentsByPatientId(Long id) {
-        if(appointmentClient.getAppointmentByPatientId(id)==null){
+    public Page<AppointmentDto> getAppointmentsByPatientId(Long id, int page, int size) {
+        if(appointmentClient.getAppointmentByPatientId(id,page,size)==null){
             throw new NotFoundException("Appointment doesn't exists");
         }
-        return appointmentClient.getAppointmentByPatientId(id);
+        return appointmentClient.getAppointmentByPatientId(id,page,size);
     }
 
     @Override
-    public List<AppointmentDto> getAppointmentsByDoctorId(Long id) {
-        if(appointmentClient.getAppointmentByDoctorId(id)==null){
+    public Page<AppointmentDto> getAppointmentsByDoctorId(Long id, int page, int size) {
+        if(appointmentClient.getAppointmentByDoctorId(id,page,size)==null){
             throw new NotFoundException("Appointment doesn't exists");
         }
-        return appointmentClient.getAppointmentByDoctorId(id);
+        return appointmentClient.getAppointmentByDoctorId(id,page,size);
     }
 
     @Override

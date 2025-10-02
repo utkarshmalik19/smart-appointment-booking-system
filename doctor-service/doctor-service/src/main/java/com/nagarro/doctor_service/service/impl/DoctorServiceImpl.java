@@ -10,6 +10,9 @@ import com.nagarro.doctor_service.service.AppointmentClient;
 import com.nagarro.doctor_service.service.AuthClient;
 import com.nagarro.doctor_service.service.DoctorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,8 +26,9 @@ public class DoctorServiceImpl implements DoctorService {
 
 
     @Override
-    public List<Doctor> getAllDoctors() {
-        return doctorRepository.findAll();
+    public Page<Doctor> getAllDoctors(int page, int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        return doctorRepository.findAll(pageable);
     }
 
     @Override
@@ -53,7 +57,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public List<AppointmentDto> getDoctorAppointments(Long doctorId, String authHeader) {
+    public Page<AppointmentDto> getDoctorAppointments(Long doctorId, String authHeader, int page, int size) {
         Doctor doctor = doctorRepository.findById(doctorId).orElseThrow(()-> new NotFoundException("Doctor not found"));
         UserDto user = authClient.getUserById(doctor.getUserId(), authHeader);
         UserDto loggedInUser = authClient.getCurrentUser(authHeader);
@@ -63,11 +67,11 @@ public class DoctorServiceImpl implements DoctorService {
         if (user == null || !user.getRole().getRoleName().equals("ROLE_DOCTOR")) {
             throw new UnauthorizedException("Unauthorized or role mismatch");
         }
-        return appointmentClient.getAppointmentsByDoctor(doctorId);
+        return appointmentClient.getAppointmentsByDoctor(doctorId,page, size);
     }
 
     @Override
-    public List<AppointmentDto> getPendingAppointments(Long doctorId, String authHeader) {
+    public Page<AppointmentDto> getPendingAppointments(Long doctorId, String authHeader, int page, int size) {
         Doctor doctor = doctorRepository.findById(doctorId).orElseThrow(()-> new NotFoundException("Doctor not found"));
         UserDto user = authClient.getUserById(doctor.getUserId(), authHeader);
         UserDto loggedInUser = authClient.getCurrentUser(authHeader);
@@ -77,7 +81,7 @@ public class DoctorServiceImpl implements DoctorService {
         if (user == null || !user.getRole().getRoleName().equals("ROLE_DOCTOR")) {
             throw new UnauthorizedException("Unauthorized or role mismatch");
         }
-        return appointmentClient.getPendingAppointments(doctorId);
+        return appointmentClient.getPendingAppointments(doctorId,page,size);
     }
 
     @Override
