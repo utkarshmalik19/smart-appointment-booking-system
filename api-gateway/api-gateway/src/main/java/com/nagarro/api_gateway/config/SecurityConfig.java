@@ -22,7 +22,8 @@ public class SecurityConfig {
                 .httpBasic(basic -> basic.disable())
                 .formLogin(form -> form.disable())
                 .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/api/auth/**").permitAll()   // public endpoints
+                        .pathMatchers("/api/auth/**").permitAll()
+                        .pathMatchers("/v3/api-docs/**","/swagger-ui.html","/swagger-ui/**").permitAll()// public endpoints
                         .pathMatchers("/api/admin/**").hasRole("ADMIN")
                         .pathMatchers("/api/doctors/**").hasAnyRole("DOCTOR","ADMIN")
                         .pathMatchers("/api/patients/**").hasAnyRole("PATIENT","ADMIN")
